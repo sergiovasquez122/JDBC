@@ -25,4 +25,10 @@ constraint books_pk primary key(GroupName, BookTitle)
 );
 
 
+-- Create values for table
+Insert into PUBLISHERS(PUBLISHERNAME, PUBLISHERADDRESS, PUBLISHERPHONE, PUBLISHEREMAIL)
+VALUES ('No Starch Press', '245 8th street', '800-420-7240', 'info@nostarch.com'),
+('The MIT Press', 'One Rogers Street', '800-405-1619', 'info@mitpress.com'),
+('Cambridge Press', '1 Liberty Plaza', '800-872-7423', 'info@cambridge.com')
+
 
