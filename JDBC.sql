@@ -29,6 +29,15 @@ constraint books_pk primary key(GroupName, BookTitle)
 Insert into PUBLISHERS(PUBLISHERNAME, PUBLISHERADDRESS, PUBLISHERPHONE, PUBLISHEREMAIL)
 VALUES ('No Starch Press', '245 8th street', '800-420-7240', 'info@nostarch.com'),
 ('The MIT Press', 'One Rogers Street', '800-405-1619', 'info@mitpress.com'),
-('Cambridge Press', '1 Liberty Plaza', '800-872-7423', 'info@cambridge.com')
+('Cambridge Press', '1 Liberty Plaza', '800-872-7423', 'info@cambridge.com'),
+('Oreilly Media', '1005 Gravenstein', '800-889-8969', 'info@oreilly.com')
 
+-- sample commands 
+select * from WRITINGGROUPS -- List all writing groups
+
+select * from PUBLISHERS -- list all publishers
+
+select * from PUBLISHERS where PUBLISHERNAME = 'No Starch Press' -- Select all the content of a particular publisher in this case No Starch Press
+
+select * from BOOKS -- list all book titles
 
