@@ -1,11 +1,18 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 /**
  *
- * @author sergio vasquez, darron cobian, harry tran
+ * @author darren
  */
 import java.sql.*;
 import java.util.Scanner;
-
+/**
+ *
+ * @author Mimi Opkins with some tweaking from Dave Brown
+ */
 public class JDBC {
     //  Database credentials
     static String USER = "Sage";
@@ -309,36 +316,42 @@ public class JDBC {
                                 System.out.println(numRows + " affected");
                             }
                             catch(SQLException se) {
-                                System.out.println("Could not process the insertion because either GroupName or PublisherName does not exist.");
+                                System.out.println("Could not process the insertion because either GroupName or PublisherName does not exist or the insertion already exists");
                             }
                             break;
                         case 8:
-                            sql = "Insert into PUBLISHERS(PUBLISHERNAME, PUBLISHERADDRESS, PUBLISHERPHONE, PUBLISHEREMAIL) VALUES (?, ?, ?, ?)";
-                            pstmt = conn.prepareStatement(sql);
-                            System.out.print("Enter a PublisherName to insert: ");
-                            input = in.nextLine();
-                            String pName = input;
-                            pstmt.setString(1, input);
-                            System.out.print("Enter a PublisherAddress to insert: ");
-                            input = in.nextLine();
-                            pstmt.setString(2, input);
-                            System.out.print("Enter a PublisherPhone to insert: ");
-                            input = in.nextLine();
-                            pstmt.setString(3, input);
-                            System.out.print("Enter a PublisherEmail to insert: ");
-                            input = in.nextLine();
-                            pstmt.setString(4, input);
-                            numRows = pstmt.executeUpdate();
-                            System.out.println(numRows + " affected.");
-                            
-                            sql = "UPDATE BOOKS SET PUBLISHERNAME = ? WHERE PUBLISHERNAME = ?";
-                            pstmt = conn.prepareStatement(sql);
-                            pstmt.setString(1, pName);
-                            System.out.print("Enter a PublisherName to replace: ");
-                            input = in.nextLine();
-                            pstmt.setString(2, input);
-                            numRows = pstmt.executeUpdate();
-                            System.out.println(numRows + " affected.");
+                            try
+                            {
+                                sql = "Insert into PUBLISHERS(PUBLISHERNAME, PUBLISHERADDRESS, PUBLISHERPHONE, PUBLISHEREMAIL) VALUES (?, ?, ?, ?)";
+                                pstmt = conn.prepareStatement(sql);
+                                System.out.print("Enter a PublisherName to insert: ");
+                                input = in.nextLine();
+                                String pName = input;
+                                pstmt.setString(1, input);
+                                System.out.print("Enter a PublisherAddress to insert: ");
+                                input = in.nextLine();
+                                pstmt.setString(2, input);
+                                System.out.print("Enter a PublisherPhone to insert: ");
+                                input = in.nextLine();
+                                pstmt.setString(3, input);
+                                System.out.print("Enter a PublisherEmail to insert: ");
+                                input = in.nextLine();
+                                pstmt.setString(4, input);
+                                numRows = pstmt.executeUpdate();
+                                System.out.println(numRows + " affected.");
+
+                                sql = "UPDATE BOOKS SET PUBLISHERNAME = ? WHERE PUBLISHERNAME = ?";
+                                pstmt = conn.prepareStatement(sql);
+                                pstmt.setString(1, pName);
+                                System.out.print("Enter a PublisherName to replace: ");
+                                input = in.nextLine();
+                                pstmt.setString(2, input);
+                                numRows = pstmt.executeUpdate();
+                                System.out.println(numRows + " affected.");
+                            }
+                            catch(SQLException se) {
+                                System.out.println("The publsher already exists");
+                            }
                             break;
                         case 9:
                             sql = "DELETE FROM Books WHERE BookTitle = ? AND GroupName = ?";
